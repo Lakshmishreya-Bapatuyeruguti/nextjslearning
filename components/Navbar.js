@@ -11,6 +11,9 @@ function Navbar() {
         <Link href="/">
           <li className="mr-6">Home</li>
         </Link>
+        <Link href="/posts">
+          <li className="mr-6">Posts</li>
+        </Link>
         <Link href="/createblog">
           <li className="mr-24">Create Blog</li>
         </Link>

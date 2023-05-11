@@ -1,24 +1,32 @@
+"use client";
 import Navbar from "@/components/Navbar";
-// import { React } from "react";
+import { useState, useEffect } from "react";
 
-function HomePage() {
-  // const [fact, setFact] = useState("");
-  // useEffect(() => {
-  async function catfact() {
-    const res = await fetch("https://catfact.ninja/fact", {
-      cache: "no-store",
-    });
-    const data = await res.json();
-    console.log(data.fact);
-  }
+function HomePage({ params }) {
+  const [data, setData] = useState([]);
 
-  catfact();
-  // }, [setFact, fact]);
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch(`https://jsonplaceholder.typicode.com/posts/`, {
+        cache: "no-store",
+      });
+      const data = await res.json();
+      setData(data);
+    }
+
+    fetchData();
+  }, []);
 
   return (
-    <div className=" bg-slate-50">
+    <div className="bg-slate-50">
       <Navbar />
-      <p></p>
+      {data.map((post, key) => {
+        return (
+          <div key={key} className="bg-green-200 m-4 text-center">
+            <h1>{post.title}</h1>
+          </div>
+        );
+      })}
     </div>
   );
 }
